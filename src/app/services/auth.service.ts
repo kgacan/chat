@@ -4,8 +4,9 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from '../classes/user';
 import { Alert } from '../classes/alert';
-
-// import 'rxjs/add/observable/of';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore'; 
+// import 'rxjs/add/operators/of';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +17,19 @@ export class AuthService {
 
   constructor(
     private router: Router,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private afAuth: AngularFireAuth,
+    private db: AngularFirestore
   ) { 
-    // this.currentUser = Observable.of(null);
+    // this.currentUser = this.afAuth.authState
+    //   .switchMap((user)=>{
+    //     if(user){
+    //       return this.db.doc<User>(`users/${user.uid}`).valueChanges();
+    //     }else{
+    //        return Observable.of(null);
+    //     }
+    //   })
+    this.currentUser = null;
   }
 
   public singup(firstName:string, lastName:string, email: string, password: string): Observable<boolean> {

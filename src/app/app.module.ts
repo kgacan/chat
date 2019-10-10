@@ -3,6 +3,7 @@ import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
+import { environment } from '../environments/environment';
 
 import { AlertModule } from 'ngx-bootstrap/alert';
 
@@ -11,6 +12,10 @@ import { AlertService } from './services/alert.service';
 import { AuthService } from './services/auth.service';
 import { LoadingService } from './services/loading.service';
 import { NgxLoadingModule } from 'ngx-loading';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 //components
 
@@ -45,7 +50,11 @@ import { ChatroomWindowComponent } from './pages/chat/components/chatroom-window
     AlertModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
-    NgxLoadingModule
+    NgxLoadingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireAuthModule
   ],
   providers: [AlertService, LoadingService, AuthService],
   bootstrap: [AppComponent]
